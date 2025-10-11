@@ -1,0 +1,177 @@
+{
+    "DEBUG": true,
+    "mqtt": {
+      "host": "192.168.50.69",
+      "port": 1883,
+      "username": "iicw-user",
+      "password": "Sports_Ilab_User"
+    },
+    "features": [
+      "mag",
+      "phi",
+      "theta",
+      "x",
+      "y",
+      "z"
+    ],
+    "plot_window": 30,
+    "future_margin": 5,
+    "global_config": {
+      "active_features": [
+        "time",
+        "z",
+        "x",
+        "y",
+        "mag",
+        "phi",
+        "theta"
+      ],
+      "render_fps": 30,
+      "measure_fps": 50,
+      "send_data": true,
+      "print_data": false,
+      "render_led": "remote",
+      "calibration": {
+        "auto_calibrate": false,
+        "AUTO_CALIBRATE_LIMIT": 0.0025,
+        "AUTO_CALIBRATE_INC": 0.00006,
+        "AUTO_CALIBRATE_PROD": 0.025,
+        "AUTO_CALIBRATE_MOVEMENT_T": 45,
+        "apply_offsets": true,
+        "apply_coefficients": true,
+        "coefficients": 0.001
+      }
+    },
+  "route_dir" : "routes/",
+    "board": {
+      "rows": 15,
+      "cols": 11,
+      "kilter_led_controller_topic": "kilter-renderer"
+    },
+    "devices": [
+      {
+        "id": "2454855314760098278",
+        "config": {
+        "coordinates": {
+          "x": 0,
+          "y": 5
+        },
+          "calibration": {
+            "coefficients": 0.0014
+          }
+        }
+      },
+      {
+        "id": "3795541639829742054",
+        "config": {
+        "coordinates": {
+          "x": 5,
+          "y": 3
+        },
+          "calibration": {
+            "coefficients": 0.0013
+          }
+        }
+      },
+      {
+        "id": "3840252060385763814",
+        "config": {
+        "coordinates": {
+          "x": 7,
+          "y": 3
+        },
+          "calibration": {
+            "coefficients": 0.005
+          }
+        }
+      },
+      {
+        "id": "3862427010894750182",
+        "config": {
+        "coordinates": {
+          "x": 3,
+          "y": 3
+        },
+          "calibration": {
+            "AUTO_CALIBRATE_MOVEMENT_T": 400,
+            "coefficients": 0.01
+          }
+        }
+      },
+      {
+        "id": "3894882395123442150",
+        "config": {
+        "coordinates": {
+          "x": 9,
+          "y": 3
+        },
+          "calibration": {
+            "AUTO_CALIBRATE_MOVEMENT_T": 160,
+            "coefficients": 0.009
+          }
+        }
+      },
+      {
+        "id": "3914011698423488998",
+        "config": {
+        "coordinates": {
+          "x": 1,
+          "y": 3
+        },
+          "calibration": {
+            "coefficients": 0.0024
+          }
+        }
+      },
+      {
+        "id": "3915047438376853990",
+        "config": {
+        "coordinates": {
+          "x": 9,
+          "y": 3
+        },
+          "calibration": {
+            "coefficients": 0.004
+          }
+        }
+      },
+      {
+        "id": "3921069463562183142",
+        "config": {
+        "coordinates": {
+          "x": 10,
+          "y": 6
+        },
+          "calibration": {
+            "coefficients": 0.001
+          }
+        }
+      },
+      {
+        "id": "4060685450057179622",
+        "config": {
+        "coordinates": {
+          "x": 8,
+          "y": 12
+        },
+          "calibration": {
+            "coefficients": 0.008
+          }
+        }
+      },
+      {
+        "id": "4142825565721813478",
+        "config": {
+        "coordinates": {
+          "x": 8,
+          "y": 13
+        },
+          "calibration": {
+            "coefficients": 0.01
+          }
+        }
+      }
+    ]
+
+  }
+  
