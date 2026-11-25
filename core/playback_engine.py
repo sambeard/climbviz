@@ -8,7 +8,7 @@ class PlaybackDevice(MockDevice):
         self.df = df
 
     def _setup(self):
-        self._wait_time = pd.Timedelta(seconds=self.df.index[0])
+        self._wait_time = self.df.index[0]
         print("Initial wait time:", self._wait_time)
         self._idx =0
 
@@ -19,16 +19,16 @@ class PlaybackDevice(MockDevice):
         pass
 
     def _wait_till_next(self):
-        print("hello", self._wait_time)
         time.sleep(self._wait_time.total_seconds())
 
     def _gen_payload(self, t):
-        this, next = self.df.iloc[self._idx], self.df.iloc[self._idx+1]
-        if next is None or next.index <= this.index:
+        if self._idx >= len(self.df)-1:
             return None
-        self._wait_time = next.index - this.index
+        this, next = self.df.iloc[self._idx], self.df.iloc[self._idx+1]
+        # row.name equals the time index value
+        self._wait_time = next.name - this.name
         self._idx += 1
-        return this.to_dict()
+        return {"time": int(t*1e3), **this.to_dict()}
 
 class PlaybackEngine:
     def __init__(self, mqtt_manager, state_manager):
@@ -57,18 +57,21 @@ class PlaybackEngine:
         """ Extracts and normalizes the dataframe for a specific device ID. """
         start_time = df.index.get_level_values("time").min()
         _df = df.xs(id, level="device_id")
-        _df.reset_index(["time"], inplace=True, drop=True)
         _df.index = _df.index - start_time
+        _df.index.name = "time"
         return _df
 
     def read_df(self, file):
-        df = pd.read_csv(file, index_col=[0,1], header= [0], parse_dates=["time"])
+        df = pd.read_csv(file, index_col=[0,1], header=[0])
+        device_ids = df.index.get_level_values(0)
+        times = pd.to_datetime(df.index.get_level_values(1).astype(float), unit="s")
+        df.index = pd.MultiIndex.from_arrays([device_ids,times], names=df.index.names)
         return df
 
     def stop(self):
         if not self.running:
             return
         self.running = False
-        for device in self.devices:
+        for id, device in self.devices.items():
             device.stop()
         self.devices.clear()
